@@ -1,0 +1,5 @@
+.runtime/
+__pycache__/
+*.pyc
+sim2sim/sonic_validation/
+sim2sim/loopmimic_014000/

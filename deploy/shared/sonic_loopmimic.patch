@@ -1,0 +1,256 @@
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/gamepad.hpp b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/gamepad.hpp
+index 0e83fe9..30182c1 100644
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/gamepad.hpp
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/gamepad.hpp
+@@ -140,2 +140,12 @@ class Button {
+ class Gamepad : public InputInterface {
++  public:
++    void ResetAfterDance(double yaw) {
++      post_dance_yaw_.store(yaw);
++      post_dance_reset_.store(true);
++    }
++
++  private:
++    std::atomic<double> post_dance_yaw_{0.0};
++    std::atomic<bool> post_dance_reset_{false};
++
+   public:
+@@ -207,2 +217,8 @@ class Gamepad : public InputInterface {
+     void update() override {
++      if (post_dance_reset_.exchange(false)) {
++        planner_facing_angle = post_dance_yaw_.load();
++        planner_moving_direction = planner_facing_angle;
++        planner_use_movement_mode = static_cast<int>(LocomotionMode::SLOW_WALK);
++        planner_use_movement_speed = -1;
++      }
+       // Check for safety reset trigger from manager
+@@ -776,2 +792,2 @@ class Gamepad : public InputInterface {
+
+-#endif
+\ No newline at end of file
++#endif
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/keyboard_handler.hpp b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/keyboard_handler.hpp
+index d1ee8bd..bb533c0 100644
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/keyboard_handler.hpp
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/keyboard_handler.hpp
+@@ -49,2 +49,3 @@
+ #include <termios.h>
++#include <atomic>
+ #include <fcntl.h>
+@@ -64,2 +65,9 @@
+ class SimpleKeyboard : public InputInterface {
++  public:
++    void ResetAfterDance(double yaw) { post_dance_yaw_.store(yaw); post_dance_reset_.store(true); }
++
++  private:
++    std::atomic<double> post_dance_yaw_{0.0};
++    std::atomic<bool> post_dance_reset_{false};
++
+   public:
+@@ -145,2 +153,6 @@ class SimpleKeyboard : public InputInterface {
+     void update() override {
++      if (post_dance_reset_.exchange(false)) {
++        planner_facing_angle = post_dance_yaw_.load();
++        movement_momentum = 0.0;
++      }
+       // Check for safety reset trigger from manager
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
+index c83a586..f0e0003 100644
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
+@@ -50,2 +50,3 @@
+ #include <cmath>
++#include <csignal>
+ #include <cuda_runtime_api.h>
+@@ -142,2 +143,3 @@
+ #include "audio_thread/audio_thread.hpp"
++#include "loopmimic_dance_handoff.hpp"
+
+@@ -301,2 +303,4 @@ class G1Deploy {
+     MotorGainScaleConfig motor_gain_scales_;
++    std::unique_ptr<LoopMimicDanceHandoff> loopmimic_dance_;
++    bool replace_planner_motion_ = false;  // Protected by current_motion_mutex_.
+     std::array<double, G1_NUM_MOTOR> last_action;
+@@ -2218,5 +2222,20 @@ class G1Deploy {
+       ChannelFactory::Instance()->Init(0, networkInterface);
++      if (const char* dance = std::getenv("LOOPMIMIC_DANCE")) {
++        const std::string dance_mode(dance);
++        if (dance_mode == "sim" && disable_crc_check_ && networkInterface == "lo" &&
++            input_type == "keyboard") {
++          loopmimic_dance_ = std::make_unique<LoopMimicDanceHandoff>(false);
++        } else if (dance_mode == "gamepad" && input_type == "gamepad" &&
++                   (!disable_crc_check_ || networkInterface == "lo")) {
++          loopmimic_dance_ = std::make_unique<LoopMimicDanceHandoff>(true);
++        } else {
++          throw std::invalid_argument("LoopMimic requires gamepad with CRC enabled, or local Sim2Sim");
++        }
++      }
+
+-      // Initialize Dex3 hands (ChannelFactory already initialized above)
+-      dex3_hands_.initialize("");
++      if (std::getenv("SONIC_NO_DEX3")) {
++        std::cout << "[INFO] G1 29-DoF body only. Dex3 DDS channels disabled." << std::endl;
++      } else {
++        dex3_hands_.initialize("");
++      }
+
+@@ -3164,2 +3183,19 @@ class G1Deploy {
+       apply_motor_gain_scales(motor_gain_scales_, motor_command_tmp);
++      if (loopmimic_dance_) {
++        auto movement = movement_state_buffer_.GetDataWithTime().data;
++        const bool planner_idle = planner_ && planner_->planner_state_.enabled &&
++            planner_->planner_state_.initialized && movement &&
++            movement->locomotion_mode == static_cast<int>(LocomotionMode::IDLE);
++        try {
++          if (loopmimic_dance_->Apply(motor_command_tmp, planner_idle)) {
++            for (int i = 0; i < G1_NUM_MOTOR; ++i) {
++              last_action[isaaclab_to_mujoco[i]] =
++                  (motor_command_tmp.q_target[i] - default_angles[i]) / g1_action_scale[i];
++            }
++          }
++        } catch (const std::exception& error) {
++          std::cerr << "[LoopMimic] " << error.what() << std::endl;
++          return false;
++        }
++      }
+       motor_command_buffer_.SetData(motor_command_tmp);
+@@ -3198,3 +3234,3 @@ class G1Deploy {
+           bool success = false;
+-          if(planner_motion_->timesteps == 0)
++          if(planner_motion_->timesteps == 0 || replace_planner_motion_)
+           {
+@@ -3219,2 +3255,3 @@ class G1Deploy {
+             planner_motion_->timesteps = planner_motion_gen.timesteps;
++            replace_planner_motion_ = false;
+             success = true;
+@@ -3327,2 +3364,3 @@ class G1Deploy {
+             current_motion_ = planner_motion_;
++            if (loopmimic_dance_ && is_the_first_time) loopmimic_dance_->NotifyNewPlannerMotion();
+             idle_readapt_stored_ = false;
+@@ -3449,5 +3487,2 @@ class G1Deploy {
+       
+-      // Update input interface (poll for new data)
+-      input_interface_->update();
+-      
+       // Handle input using the interface - input handler updates everything directly
+@@ -3485,3 +3520,22 @@ class G1Deploy {
+       }
+-    
++
++      // Decode the current packet before routing native gamepad button edges.
++      input_interface_->update();
++      if (loopmimic_dance_ && loopmimic_dance_->UsesGamepad()) {
++        if (auto gamepad = dynamic_cast<unitree::common::Gamepad*>(input_interface_.get())) {
++          if (gamepad->play_motion && gamepad->use_planner) {
++            if (std::abs(gamepad->lx) < gamepad->dead_zone &&
++                std::abs(gamepad->ly) < gamepad->dead_zone &&
++                std::abs(gamepad->rx) < gamepad->dead_zone &&
++                std::abs(gamepad->ry) < gamepad->dead_zone)
++              loopmimic_dance_->RequestStart();
++            gamepad->play_motion = false;
++          }
++          if (loopmimic_dance_->BlocksMovement()) {
++            if (gamepad->planner_emergency_stop) loopmimic_dance_->RequestCancel();
++            // Keep the planner available for the return blend. Select retains its native effect.
++            if (planner_) gamepad->use_planner = planner_->planner_state_.enabled;
++          }
++        }
++      }
+      
+@@ -3497,2 +3551,10 @@ class G1Deploy {
+       }
++      if (loopmimic_dance_ && loopmimic_dance_->BlocksMovement()) {
++        auto motion = movement_state_buffer_.GetDataWithTime().data;
++        if (motion && motion->locomotion_mode != static_cast<int>(LocomotionMode::IDLE)) {
++          movement_state_buffer_.SetData(MovementState(
++              static_cast<int>(LocomotionMode::IDLE), {0.0, 0.0, 0.0},
++              motion->facing_direction, 0.0, -1.0));
++        }
++      }
+
+@@ -3601,2 +3663,19 @@ class G1Deploy {
+         if (ls) {
++          const bool returning_from_dance = loopmimic_dance_ && loopmimic_dance_->TakePlannerRestart();
++          if (returning_from_dance) {
++            const auto base = float_to_double<4>(ls->imu_state().quaternion());
++            auto heading = calc_heading_quat_d(base);
++            const double yaw = 2.0 * std::atan2(heading[3], heading[0]);
++            if (auto keyboard = dynamic_cast<SimpleKeyboard*>(input_interface_.get())) {
++              keyboard->ResetAfterDance(yaw);
++            }
++            if (auto gamepad = dynamic_cast<unitree::common::Gamepad*>(input_interface_.get())) {
++              gamepad->ResetAfterDance(yaw);
++            }
++            const MovementState idle(static_cast<int>(LocomotionMode::IDLE),
++                {0.0, 0.0, 0.0}, {std::cos(yaw), std::sin(yaw), 0.0}, 0.0, -1.0);
++            movement_state_buffer_.SetData(idle);
++            last_movement_state_ = idle;
++            planner_->planner_state_.initialized = false;
++          }
+           if (!planner_->planner_state_.initialized) {
+@@ -3604,5 +3683,2 @@ class G1Deploy {
+               std::cout << "Initializing planner..." << std::endl;
+-              planner_motion_->timesteps = 0;
+-              std::cout << "Setting planner_motion encode mode to " << initial_encoder_mode_ << std::endl;
+-              planner_motion_->SetEncodeMode(initial_encoder_mode_);
+               // Get base quaternion and joint positions from robot state
+@@ -3613,5 +3689,15 @@ class G1Deploy {
+               }
+-              // Initialize planner with robot state
+-              if(!planner_->Initialize(base_quat, joint_positions)) {
+-                throw std::runtime_error("Error when initializing planner");
++              {
++                std::lock_guard<std::mutex> lock(current_motion_mutex_);
++                // Keep a valid reference for the tracker until the new Idle clip arrives.
++                if (returning_from_dance) {
++                  replace_planner_motion_ = true;
++                } else {
++                  planner_motion_->timesteps = 0;
++                }
++                std::cout << "Setting planner_motion encode mode to " << initial_encoder_mode_ << std::endl;
++                planner_motion_->SetEncodeMode(initial_encoder_mode_);
++                if (!planner_->Initialize(base_quat, joint_positions)) {
++                  throw std::runtime_error("Error when initializing planner");
++                }
+               }
+@@ -3633,3 +3719,2 @@ class G1Deploy {
+               planner_->planner_state_.initialized = false;
+-              planner_motion_->timesteps = 0;
+               // reset operator state and current motion and frame
+@@ -3637,2 +3722,4 @@ class G1Deploy {
+                 std::lock_guard<std::mutex> lock(current_motion_mutex_);
++                replace_planner_motion_ = false;
++                planner_motion_->timesteps = 0;
+                 operator_state.play = false;
+@@ -4146,2 +4233,7 @@ static bool parse_motor_gain_scale_flag(
+  */
++namespace {
++volatile std::sig_atomic_t shutdown_requested = 0;
++void RequestShutdown(int) { shutdown_requested = 1; }
++}
++
+ int main(int argc, char const* argv[]) {
+@@ -4512,6 +4604,8 @@ int main(int argc, char const* argv[]) {
+   
+-  // Main application loop - check both operator_state.stop and ROS2 status if using ROS2
++  std::signal(SIGINT, RequestShutdown);
++  std::signal(SIGTERM, RequestShutdown);
++  // Let the native Stop() issue its damping command on a terminal shutdown.
+ #if HAS_ROS2
+   if (inputType == "ros2") {
+-    while (!custom.operator_state.stop && rclcpp::ok()) { 
++    while (!custom.operator_state.stop && !shutdown_requested && rclcpp::ok()) {
+       sleep(0.02); 
+@@ -4522,6 +4616,10 @@ int main(int argc, char const* argv[]) {
+   } else {
+-    while (!custom.operator_state.stop) { sleep(0.02); }
++    while (!custom.operator_state.stop && !shutdown_requested) {
++      std::this_thread::sleep_for(std::chrono::milliseconds(20));
++    }
+   }
+ #else
+-  while (!custom.operator_state.stop) { sleep(0.02); }
++  while (!custom.operator_state.stop && !shutdown_requested) {
++    std::this_thread::sleep_for(std::chrono::milliseconds(20));
++  }
+ #endif

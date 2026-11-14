@@ -1,0 +1,21 @@
+{
+  "outcome": "completed",
+  "physics_s": 179.0220000001267,
+  "actuated_joints": 29,
+  "physics_dt_s": 0.002,
+  "control_dt_s": 0.02,
+  "reference_frames": 6574,
+  "dance_frames_played": 6574,
+  "crc_validated": true,
+  "input": "Unitree gamepad packets",
+  "passed": true,
+  "environment": "MuJoCo DDS loopback, NVIDIA SONIC with native Unitree packet decoding, x86_64",
+  "policy_sha256": "c9d3bd5c467398e48e2dbbb8e708a54f81466ebc9824239b8994357d0acabc89",
+  "reference": "LAFAN1 / dance1_subject2, converted from the published G1 CSV",
+  "duration_s": 131.48,
+  "post_dance_idle_frames": 200,
+  "post_dance_idle_double_support_frames": 200,
+  "post_dance_walk_distance_m": 2.166397228612469,
+  "stop_frames": 250,
+  "stop_double_support_frames": 225
+}
