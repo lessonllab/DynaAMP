@@ -1,0 +1,144 @@
+{
+  "task_id": "SuperMimic-GenCoord-G1",
+  "runner_cfg": {
+    "wandb_project": "supermimic",
+    "run_name": "loopmimic_v2_lafan40_seed0",
+    "wandb_run_path": null,
+    "headless": true,
+    "buffer_size": 1000,
+    "representation": "gencoord",
+    "actor_obs": "rep_state",
+    "log_interval": 10,
+    "save_interval": 1000,
+    "history_length": 1,
+    "termination_softness": 0.05,
+    "dynamics_hidden_dims": [
+      2048,
+      2048,
+      2048
+    ],
+    "mlp_bf16": true,
+    "wm": {
+      "lr": 0.0002,
+      "num_batches": 10,
+      "batch_size": 2048,
+      "horizon": 8,
+      "gain_loss_weight": 0.01,
+      "nominal_error_root_pose_pos": 0.01,
+      "nominal_error_root_pose_ori": 0.02,
+      "nominal_error_joint_pos": 0.1,
+      "nominal_error_joint_vel": 3.14,
+      "nominal_error_body_pos": 0.05,
+      "nominal_error_body_rot": 0.1,
+      "nominal_error_body_vel": 1.0,
+      "nominal_error_body_avel": 3.14
+    },
+    "root_position_feedback": true,
+    "policy_ema_decay": 0.995,
+    "failure_focus_fraction": 0.2,
+    "failure_lookback_seconds": 3.0,
+    "max_iterations": 1000000,
+    "max_sim_transitions": null,
+    "max_amp_updates": 20000,
+    "budget_checkpoints": [],
+    "amp": {
+      "enabled": true,
+      "feature_mode": "grounded199",
+      "hidden_dims": [
+        1024,
+        512,
+        256
+      ],
+      "batch_size": 2048,
+      "lr": 0.0001,
+      "grad_penalty": 10.0,
+      "weight_decay": 0.0001,
+      "weight": 0.1,
+      "warmup_updates": 100,
+      "ramp_updates": 400,
+      "norm_rate": 0.01
+    },
+    "amp_feedback": {
+      "enabled": true,
+      "interval": 250,
+      "min_amp_updates": 100,
+      "action_delta_rms": 0.03,
+      "action_delta_max": 0.1,
+      "local_noise": 0.03,
+      "selected_fraction": 0.25,
+      "priority_fraction": 0.25,
+      "priority_cap": 20.0,
+      "capacity": 16384,
+      "holdout_stride": 8,
+      "repeat_tolerance": 0.0002,
+      "policy_start_fraction": 0.25,
+      "discriminator_fraction": 0.25,
+      "priority_decay": 0.99
+    },
+    "resume_checkpoint": null,
+    "policy_activation_checkpointing": true,
+    "replay_ratio": 16,
+    "latent_dim": 32,
+    "actor_hidden_dims": [
+      2048,
+      1024,
+      512,
+      256
+    ],
+    "critic_hidden_dims": [
+      256,
+      128
+    ],
+    "latent_bc_weight": 0.1,
+    "tasks": {
+      "velocity": {
+        "lin_vel_x_range": [
+          -1.5,
+          1.5
+        ],
+        "lin_vel_y_range": [
+          -0.5,
+          0.5
+        ],
+        "ang_vel_z_range": [
+          -3.14,
+          3.14
+        ],
+        "window_frames": 25,
+        "command_noise": [
+          0.5,
+          0.5,
+          0.785
+        ]
+      }
+    },
+    "slot_mix": {
+      "motion": 1.0,
+      "velocity": 0.0
+    },
+    "policy": {
+      "lr": 0.0002,
+      "num_batches": 1,
+      "batch_size": 4096,
+      "noise": 0.1,
+      "horizon": 32,
+      "gamma": 0.99,
+      "survival_masking": true,
+      "beta2": 0.95,
+      "grad_clip_value": 0.1,
+      "detach_style_survival": true,
+      "lam": 0.95
+    },
+    "sampling_mode": "return",
+    "return_sampler": {
+      "gamma": 0.99,
+      "horizon": 20,
+      "memory": 256,
+      "steepness": 25.0,
+      "explore": 0.5,
+      "keep": 0.1
+    }
+  },
+  "motion_file": "data/lafan1_g1_50hz/*.npz",
+  "num_envs": 4096
+}

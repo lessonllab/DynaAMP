@@ -1,0 +1,288 @@
+{
+  "repository": "https://github.com/JonnyDing/supermimic_AMP",
+  "branch": "supermimic",
+  "commit": "596dfe37e0f75769b635386cd589960cce7faaa2",
+  "modification": "Absolute import namespaces only; tracking task adapter lives outside the vendor package.",
+  "files": [
+    {
+      "path": "supermimic/__init__.py",
+      "source_sha256": "ee41da617e0fcae8d7cd5f19c16ad63c7563ffbba8749ea7781869ca83d98bf1",
+      "adapted_sha256": "ee41da617e0fcae8d7cd5f19c16ad63c7563ffbba8749ea7781869ca83d98bf1"
+    },
+    {
+      "path": "supermimic/adapters/__init__.py",
+      "source_sha256": "e71e1bc3c17adc5005f6c1e4f2d1fe223e74f1b48b44ae462fe7b3189be6de3d",
+      "adapted_sha256": "e71e1bc3c17adc5005f6c1e4f2d1fe223e74f1b48b44ae462fe7b3189be6de3d"
+    },
+    {
+      "path": "supermimic/adapters/mjlab.py",
+      "source_sha256": "c8feec170577c9b3c962582c84f6907a97f4d2e06ee15e744e13d9e881bcd838",
+      "adapted_sha256": "a8e0a0c3c1ec3093280a0dc964ad0720a252005bad2c5bccd55588e52847b8fa"
+    },
+    {
+      "path": "supermimic/agent_config.py",
+      "source_sha256": "165da3044de19a3eca7f101e76d0cf32326c3682dc17d0846105bb13c5302bcb",
+      "adapted_sha256": "165da3044de19a3eca7f101e76d0cf32326c3682dc17d0846105bb13c5302bcb"
+    },
+    {
+      "path": "supermimic/cli.py",
+      "source_sha256": "6e15105081c466dc1b7a2982a3ad4fdc2134616eae22b4806392aedca69b29cb",
+      "adapted_sha256": "99b9ac69d72f085748b53b51d66d6186e207136bcd184106a8cf540ef139e211"
+    },
+    {
+      "path": "supermimic/contracts.py",
+      "source_sha256": "5d21a0f95f4667e798a7243891a4a86b5238a72e1765a9d31c526657eca666d9",
+      "adapted_sha256": "5d21a0f95f4667e798a7243891a4a86b5238a72e1765a9d31c526657eca666d9"
+    },
+    {
+      "path": "supermimic/core/__init__.py",
+      "source_sha256": "8a6f60965d2351ea2fa8e9a023736aa7074082dc0327f90861e29ddcb233d3dd",
+      "adapted_sha256": "8a6f60965d2351ea2fa8e9a023736aa7074082dc0327f90861e29ddcb233d3dd"
+    },
+    {
+      "path": "supermimic/core/batching.py",
+      "source_sha256": "982d963aae2847408533d0f7b65fc365e1591f0cc36d98caf3f31714eb2449a8",
+      "adapted_sha256": "982d963aae2847408533d0f7b65fc365e1591f0cc36d98caf3f31714eb2449a8"
+    },
+    {
+      "path": "supermimic/core/bootstrap.py",
+      "source_sha256": "bdecdd78f49bd3f840f7afebb1b5fc8d4476eb18c9721668d0ccb528e8e17a72",
+      "adapted_sha256": "bdecdd78f49bd3f840f7afebb1b5fc8d4476eb18c9721668d0ccb528e8e17a72"
+    },
+    {
+      "path": "supermimic/core/checkpoint.py",
+      "source_sha256": "3c491648a0d7139cc8eb03d6dd49a5fb74f64e71602682683ebd8ea328afdad4",
+      "adapted_sha256": "3c491648a0d7139cc8eb03d6dd49a5fb74f64e71602682683ebd8ea328afdad4"
+    },
+    {
+      "path": "supermimic/core/collection.py",
+      "source_sha256": "9f321ef75194c7655d1115330cbc58c5ecb1779d68b48167f6db2ee4bf7c6b62",
+      "adapted_sha256": "953afaccc37791f33c5f6e5274c2c8638d214eaa8b6015d52bfb80a319f4510b"
+    },
+    {
+      "path": "supermimic/core/fast.py",
+      "source_sha256": "a898e91e9f5c6314672629cba075c2a8c6bd5b1ad44df077eefd6748dc8bddfb",
+      "adapted_sha256": "71f0d8613211af735d6903243929f7cfbb30e7f3241a152257d469ff55eaf937"
+    },
+    {
+      "path": "supermimic/core/imagination.py",
+      "source_sha256": "100f6f1db625a156c35faa3fa7a4e7a39215821af0450a5167fb59c9e56cdd81",
+      "adapted_sha256": "100f6f1db625a156c35faa3fa7a4e7a39215821af0450a5167fb59c9e56cdd81"
+    },
+    {
+      "path": "supermimic/core/logging.py",
+      "source_sha256": "d0e7b931b5f0c4c57cd569b2d0be488508a440aaa68f5415746a78ad532a2dbe",
+      "adapted_sha256": "d0e7b931b5f0c4c57cd569b2d0be488508a440aaa68f5415746a78ad532a2dbe"
+    },
+    {
+      "path": "supermimic/core/normalization.py",
+      "source_sha256": "fa6e6c5bd1bfe1f888218503e8053bec164277434ff7878fa592dfdfe2cf7092",
+      "adapted_sha256": "cac16d5efe2f4984175ab96f63e708f4b4d78403a42b0fb32518fdf5b9a5d0e5"
+    },
+    {
+      "path": "supermimic/core/p4.py",
+      "source_sha256": "fa8a91ba2fd9384992673a1100eb5362a57ed257b716213ee4306d57d7ed2363",
+      "adapted_sha256": "fa8a91ba2fd9384992673a1100eb5362a57ed257b716213ee4306d57d7ed2363"
+    },
+    {
+      "path": "supermimic/core/policy.py",
+      "source_sha256": "415e97e35a51becbb4815a32590943c57ac6dfddc21e281d3545308629200790",
+      "adapted_sha256": "fbb7f592f8936394f128cbfcad6c3da5b27fa5645f37bac27fd2afee89140f61"
+    },
+    {
+      "path": "supermimic/core/replay.py",
+      "source_sha256": "ef528c7b49fd31b32a5b99cde0bcd2a27eac8484cb27dd8e75170e85748e3742",
+      "adapted_sha256": "ef528c7b49fd31b32a5b99cde0bcd2a27eac8484cb27dd8e75170e85748e3742"
+    },
+    {
+      "path": "supermimic/core/rotations.py",
+      "source_sha256": "4cfba6d2d937d022bf07eeb16efee30576fb4d1f98b2cd738aa8f29edf077372",
+      "adapted_sha256": "4cfba6d2d937d022bf07eeb16efee30576fb4d1f98b2cd738aa8f29edf077372"
+    },
+    {
+      "path": "supermimic/core/state.py",
+      "source_sha256": "762dbc40e8a9735a912304e6b7c0f225e202388f7698572e10c970f9d50afec5",
+      "adapted_sha256": "b1f89b554f232ae1b72026a04ed3e734cf97aa24c70ba4dd0fc3de06ea459410"
+    },
+    {
+      "path": "supermimic/core/task_model.py",
+      "source_sha256": "15c632888e3f7e936f4c356034c5b3ed060804566fe54169b39c9401933b1a61",
+      "adapted_sha256": "546ef83a7683235c2eb68d4088d278778c8e6606148f3a759253ff62f887f242"
+    },
+    {
+      "path": "supermimic/core/world_model.py",
+      "source_sha256": "5cad4399a145ed12b72561abfde398d8e38813d73178fbe9daca1bd2b81e5e02",
+      "adapted_sha256": "5cad4399a145ed12b72561abfde398d8e38813d73178fbe9daca1bd2b81e5e02"
+    },
+    {
+      "path": "supermimic/evaluation/__init__.py",
+      "source_sha256": "f43940d3873e21d5e198a8054cffb847aecaa7c1dc90dff118a35076df23721d",
+      "adapted_sha256": "f43940d3873e21d5e198a8054cffb847aecaa7c1dc90dff118a35076df23721d"
+    },
+    {
+      "path": "supermimic/evaluation/metrics.py",
+      "source_sha256": "ccdd8c3414a226c45af38b94cb46911915d0cb9144c96f88732663aadb6d3574",
+      "adapted_sha256": "ccdd8c3414a226c45af38b94cb46911915d0cb9144c96f88732663aadb6d3574"
+    },
+    {
+      "path": "supermimic/evaluation/scenarios.py",
+      "source_sha256": "c2588ae8e5465b9fceb4b0328f3d83084ef537f7b8e6b7934cc6a045519cd3cd",
+      "adapted_sha256": "69673c8fad286a4139f7f569e2679bbad7174e0d9d0ef7314f6610004464bccc"
+    },
+    {
+      "path": "supermimic/evaluation/scratch.py",
+      "source_sha256": "530eb9e00f2ca046ec1871a78a076658374581d8c2c46f95acbf3b52414f0429",
+      "adapted_sha256": "1a3f05e389c902b09a90b85f0dcfa8ee9e8ac77d5aff697e0edd970d34189001"
+    },
+    {
+      "path": "supermimic/licenses/supermimic_vibed.MIT",
+      "source_sha256": "e2cae9ced357038c7a3ae8b580d9afa6fea8e96c2cb1d703dadde48973d620ab",
+      "adapted_sha256": "e2cae9ced357038c7a3ae8b580d9afa6fea8e96c2cb1d703dadde48973d620ab"
+    },
+    {
+      "path": "supermimic/mdp/__init__.py",
+      "source_sha256": "cbc1a96da83d34aae6f47024144c18071ef9e22ae21f5c0e42b7684c02bac479",
+      "adapted_sha256": "cbc1a96da83d34aae6f47024144c18071ef9e22ae21f5c0e42b7684c02bac479"
+    },
+    {
+      "path": "supermimic/mdp/amp.py",
+      "source_sha256": "b7751be1cda1f96e0e406f5d20a226f487cccdd8ff2f847ff03ac70dce00a155",
+      "adapted_sha256": "1ccea3fb807abc7e4844524705193da6f1c5f3bbbf05beee211c144ee9397b64"
+    },
+    {
+      "path": "supermimic/mdp/kinematics.py",
+      "source_sha256": "a883e3a2c11ff511b5758416699f09c525026f8733e14500626c08a15da96038",
+      "adapted_sha256": "a883e3a2c11ff511b5758416699f09c525026f8733e14500626c08a15da96038"
+    },
+    {
+      "path": "supermimic/mdp/observations.py",
+      "source_sha256": "e712f6e83a79376e4fdb6d7418f0bc0ecb956ee0a73aaec75bf084a963180629",
+      "adapted_sha256": "e712f6e83a79376e4fdb6d7418f0bc0ecb956ee0a73aaec75bf084a963180629"
+    },
+    {
+      "path": "supermimic/mdp/recovery.py",
+      "source_sha256": "c069edb5dd402ecd89abed108a80747968de1ca662599f02ecd8d683544336a4",
+      "adapted_sha256": "a39a00f42d72e5a65e491e902e4d2fc24305244bbf64ffaa8cfe4cb438266d2c"
+    },
+    {
+      "path": "supermimic/mdp/velocity.py",
+      "source_sha256": "15cbe29ac519ee2ec7f68f3b7637f7896b9b6017687f1ff23a0145b533d07821",
+      "adapted_sha256": "85858bcdb99b4899eae9e4e7a43211c50c34689d601f85a0bac51d2583c13d77"
+    },
+    {
+      "path": "supermimic/train_fast.py",
+      "source_sha256": "605a0e8da87dbed69af6a6dd443e8ea6740b4f877da9911599afef229888d7ed",
+      "adapted_sha256": "665cd2acf4c47e4c73784f137bea9f54f5ebbe1563f562239aff8f9631efc782"
+    },
+    {
+      "path": "rsl_rl/__init__.py",
+      "source_sha256": "6fc994295fb9d039724d9ae767e9c2f7c55fdf32011faf3c239633fd57604d72",
+      "adapted_sha256": "6fc994295fb9d039724d9ae767e9c2f7c55fdf32011faf3c239633fd57604d72"
+    },
+    {
+      "path": "rsl_rl/env/__init__.py",
+      "source_sha256": "6d892c205aa0c61573c57047e1caea186d38fa75eed28e2dabbd6fa6818c2a12",
+      "adapted_sha256": "6d892c205aa0c61573c57047e1caea186d38fa75eed28e2dabbd6fa6818c2a12"
+    },
+    {
+      "path": "rsl_rl/env/vec_env.py",
+      "source_sha256": "b58e28466646eaf9b53de9eb0360c64ef9eab02c81994a4d78bc82afd393510e",
+      "adapted_sha256": "b58e28466646eaf9b53de9eb0360c64ef9eab02c81994a4d78bc82afd393510e"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/black-license.txt",
+      "source_sha256": "9c0428f0c3b4779850cf5bd96e11aaa8afc72d4a86d4a36223d7aba2e58d6e00",
+      "adapted_sha256": "9c0428f0c3b4779850cf5bd96e11aaa8afc72d4a86d4a36223d7aba2e58d6e00"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/codespell-license.txt",
+      "source_sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+      "adapted_sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/flake8-license.txt",
+      "source_sha256": "e46df9e59cebfbe0b14492e5cde341e8ec42d252a99b6a583fc4608863a5dabe",
+      "adapted_sha256": "e46df9e59cebfbe0b14492e5cde341e8ec42d252a99b6a583fc4608863a5dabe"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/isort-license.txt",
+      "source_sha256": "063294001c3d523dbacbab9dd54ac229982756ccaf592ca53240b2b0cdd82065",
+      "adapted_sha256": "063294001c3d523dbacbab9dd54ac229982756ccaf592ca53240b2b0cdd82065"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/numpy_license.txt",
+      "source_sha256": "c17011467b4fe6e20fbfbeda4df09e58c2bca5480a063e55735a4000a379aad9",
+      "adapted_sha256": "c17011467b4fe6e20fbfbeda4df09e58c2bca5480a063e55735a4000a379aad9"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/onnx-license.txt",
+      "source_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "adapted_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/pre-commit-hooks-license.txt",
+      "source_sha256": "ea2ca27cba7cc35822d95a46d59bcd3cc88e196592e6390d1949a359ffc990e8",
+      "adapted_sha256": "ea2ca27cba7cc35822d95a46d59bcd3cc88e196592e6390d1949a359ffc990e8"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/pre-commit-license.txt",
+      "source_sha256": "ea2ca27cba7cc35822d95a46d59bcd3cc88e196592e6390d1949a359ffc990e8",
+      "adapted_sha256": "ea2ca27cba7cc35822d95a46d59bcd3cc88e196592e6390d1949a359ffc990e8"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/pyright-license.txt",
+      "source_sha256": "285ac8fd620723b9ec86e59a10808360e9825658790f412a1ff6d5d499cc01da",
+      "adapted_sha256": "285ac8fd620723b9ec86e59a10808360e9825658790f412a1ff6d5d499cc01da"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/pyupgrade-license.txt",
+      "source_sha256": "ec1e7339c4ff924852df2f5d74170120e3a722aab28c8b6ef20660c3dbe9a2b7",
+      "adapted_sha256": "ec1e7339c4ff924852df2f5d74170120e3a722aab28c8b6ef20660c3dbe9a2b7"
+    },
+    {
+      "path": "rsl_rl/licenses/dependencies/torch_license.txt",
+      "source_sha256": "6f598239866f2794b1170c870217a604b6acc98d4aeb4694d1a2f855da1f289c",
+      "adapted_sha256": "6f598239866f2794b1170c870217a604b6acc98d4aeb4694d1a2f855da1f289c"
+    },
+    {
+      "path": "rsl_rl/modules/__init__.py",
+      "source_sha256": "35e5f3aba55e8f846b7f9d614a619a7e7996ff0d44d4c8245aad16959ccd5331",
+      "adapted_sha256": "35e5f3aba55e8f846b7f9d614a619a7e7996ff0d44d4c8245aad16959ccd5331"
+    },
+    {
+      "path": "rsl_rl/modules/actor_critic.py",
+      "source_sha256": "32865aea1017813c86b0cd9250b7f9411761bea573eccdbba24f54c47051eef1",
+      "adapted_sha256": "1739ed5d04d265cbe81f5c4f275f65c040d14c1433c106b0b5f474e9992bf5e0"
+    },
+    {
+      "path": "rsl_rl/modules/discriminator.py",
+      "source_sha256": "33bb2ab7784d0ad268213e734039a97773de3f235081264aee355e70542f7899",
+      "adapted_sha256": "33bb2ab7784d0ad268213e734039a97773de3f235081264aee355e70542f7899"
+    },
+    {
+      "path": "rsl_rl/modules/normalizer.py",
+      "source_sha256": "e6d61d3d260958f926917d1f37ec5ba40f51470f6410437b624551928e37473f",
+      "adapted_sha256": "e6d61d3d260958f926917d1f37ec5ba40f51470f6410437b624551928e37473f"
+    },
+    {
+      "path": "rsl_rl/runners/__init__.py",
+      "source_sha256": "66e26565b0a99f0a5955aa75726eb9ce1e3ac2ef88f135c0d24e738ee296b617",
+      "adapted_sha256": "66e26565b0a99f0a5955aa75726eb9ce1e3ac2ef88f135c0d24e738ee296b617"
+    },
+    {
+      "path": "rsl_rl/setup.py",
+      "source_sha256": "fd2e790b9915fd896c8959a546cbffdde375b192707e243619a6c59237779466",
+      "adapted_sha256": "fd2e790b9915fd896c8959a546cbffdde375b192707e243619a6c59237779466"
+    },
+    {
+      "path": "rsl_rl/utils/__init__.py",
+      "source_sha256": "294e32be0cf5e0cfe56c796a58185c3fc99683c3b28046e225313852b65374cb",
+      "adapted_sha256": "294e32be0cf5e0cfe56c796a58185c3fc99683c3b28046e225313852b65374cb"
+    },
+    {
+      "path": "rsl_rl/utils/utils.py",
+      "source_sha256": "e80f63267b771225e6913bfdb913d671485c4cde7b5637491ce1638c8462b7d1",
+      "adapted_sha256": "e80f63267b771225e6913bfdb913d671485c4cde7b5637491ce1638c8462b7d1"
+    }
+  ]
+}

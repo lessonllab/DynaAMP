@@ -1,0 +1,112 @@
+{
+  "final_updates": 14000,
+  "stop_reason": "full_coverage",
+  "first_full_coverage_updates": 14000,
+  "real_sim_transitions": 163385344,
+  "evaluation_seed": 20261113,
+  "clips": 40,
+  "replicas_per_clip": 4,
+  "policy": "EMA",
+  "evaluation_summary": {
+    "completion_rate": 1.0,
+    "mean_duration_fraction": 1.0,
+    "root_pos_m": 0.04599173711612821,
+    "joint_rmse_rad": 0.08181304971221834,
+    "body_pos_m": 0.02857819607015699,
+    "task_return": 1046.345314025879,
+    "near_ground_foot_speed_mps": 0.34325390718877313,
+    "contact_foot_speed_mps": 0.16607272624969482,
+    "foot_contact_fraction": 0.6643794178962708
+  },
+  "milestones": [
+    {
+      "updates": 2000,
+      "completed": 133,
+      "episodes": 160,
+      "training_real_sim_transitions": 23228416
+    },
+    {
+      "updates": 4000,
+      "completed": 148,
+      "episodes": 160,
+      "training_real_sim_transitions": 46575616
+    },
+    {
+      "updates": 5000,
+      "completed": 156,
+      "episodes": 160,
+      "training_real_sim_transitions": 58273792
+    },
+    {
+      "updates": 6000,
+      "completed": 157,
+      "episodes": 160,
+      "training_real_sim_transitions": 69947392
+    },
+    {
+      "updates": 7000,
+      "completed": 156,
+      "episodes": 160,
+      "training_real_sim_transitions": 81620992
+    },
+    {
+      "updates": 8000,
+      "completed": 158,
+      "episodes": 160,
+      "training_real_sim_transitions": 93294592
+    },
+    {
+      "updates": 9000,
+      "completed": 158,
+      "episodes": 160,
+      "training_real_sim_transitions": 104968192
+    },
+    {
+      "updates": 10000,
+      "completed": 158,
+      "episodes": 160,
+      "training_real_sim_transitions": 116641792
+    },
+    {
+      "updates": 11000,
+      "completed": 159,
+      "episodes": 160,
+      "training_real_sim_transitions": 128339968
+    },
+    {
+      "updates": 12000,
+      "completed": 159,
+      "episodes": 160,
+      "training_real_sim_transitions": 140038144
+    },
+    {
+      "updates": 13000,
+      "completed": 158,
+      "episodes": 160,
+      "training_real_sim_transitions": 151711744
+    },
+    {
+      "updates": 14000,
+      "completed": 160,
+      "episodes": 160,
+      "training_real_sim_transitions": 163385344
+    }
+  ],
+  "restart_updates": [
+    4000,
+    10000,
+    11000
+  ],
+  "gradient_audit": {
+    "passed": true,
+    "steps": 32,
+    "only_final_pair_loss": true,
+    "task_reward_used": false,
+    "unweighted_style_cost": 0.8090150356292725,
+    "actor_gradient_norm": 5.702856063842773,
+    "first_action_gradient_norm": 0.02651497721672058,
+    "world_model_frozen": true,
+    "discriminator_frozen": true
+  },
+  "deployment_onnx_sha256": "c9d3bd5c467398e48e2dbbb8e708a54f81466ebc9824239b8994357d0acabc89"
+}

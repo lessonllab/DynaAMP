@@ -1,0 +1,47 @@
+{
+  "repository": "https://github.com/ccrpRepo/AMP_mjlab",
+  "commit": "6c7a2947fccc973e4af8e6d90e550400f1b6fcfc",
+  "modification": "Only absolute import prefixes changed; package exports restricted to dependencies used.",
+  "files": [
+    {
+      "path": "algorithms/amp_ppo.py",
+      "source_sha256": "df53e511af2590a4d4c7c38417f4ba7303ca42950e723173231b7603ef2eccef",
+      "adapted_sha256": "cb3b7058467e2650b2b73df00fff665e1751f62b887198a02c22fc5912be2cd7"
+    },
+    {
+      "path": "modules/actor_critic.py",
+      "source_sha256": "32865aea1017813c86b0cd9250b7f9411761bea573eccdbba24f54c47051eef1",
+      "adapted_sha256": "b3fae29c329e1ed6e4f13b1def2eab7cbfbbef789239073ef0ab52665cc0e498"
+    },
+    {
+      "path": "modules/discriminator.py",
+      "source_sha256": "33bb2ab7784d0ad268213e734039a97773de3f235081264aee355e70542f7899",
+      "adapted_sha256": "33bb2ab7784d0ad268213e734039a97773de3f235081264aee355e70542f7899"
+    },
+    {
+      "path": "modules/normalizer.py",
+      "source_sha256": "e6d61d3d260958f926917d1f37ec5ba40f51470f6410437b624551928e37473f",
+      "adapted_sha256": "e6d61d3d260958f926917d1f37ec5ba40f51470f6410437b624551928e37473f"
+    },
+    {
+      "path": "modules/rnd.py",
+      "source_sha256": "a5d4418eeace26236fab89beda59fc5c91c583f2d2650c477c550d0aee35fa59",
+      "adapted_sha256": "cf78d4a8408425e1f62377cf2f819021321cd7a9f7461afeb0408ccd5139175f"
+    },
+    {
+      "path": "storage/replay_buffer.py",
+      "source_sha256": "232f38843091bc7eefd4b6d131edde860bb9136089fb051b58b37e64943f8343",
+      "adapted_sha256": "232f38843091bc7eefd4b6d131edde860bb9136089fb051b58b37e64943f8343"
+    },
+    {
+      "path": "storage/rollout_storage.py",
+      "source_sha256": "bea81651edd57f7f974ffecb4ec64dde1948f45ae279a104e24fce43fe710a83",
+      "adapted_sha256": "c6c5a7d6376844a68401912ee42fd34c4c0e43bba24f66da1b8e7aa872e5458a"
+    },
+    {
+      "path": "utils/utils.py",
+      "source_sha256": "567efd7f31956146a524f9a077edf628e15c54c9e9f062e55c2c685c30ada24f",
+      "adapted_sha256": "567efd7f31956146a524f9a077edf628e15c54c9e9f062e55c2c685c30ada24f"
+    }
+  ]
+}

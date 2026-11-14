@@ -1,12 +1,11 @@
-# LoopMimic Deploy
+# LoopMimic
 
-Unitree G1 29-DoF deployment with LoopMimic's **14,000-update EMA checkpoint** and NVIDIA GEAR-SONIC. LoopMimic tracks the full **131.48 s** LAFAN1 `dance1_subject2` motion. SONIC handles standby, joystick locomotion, and the return to Idle.
+LoopMimic v2 is a differentiable world-model method for Unitree G1 whole-body imitation. Its AMP loss trains the policy through 32-step BPTT. Paired action interventions in MuJoCo supply real data to calibrate the world model's prediction of style changes.
 
-The exported ONNX and policy configuration are part of this repository. Setup downloads the pinned SONIC models and the original motion reference from their publishers and prepares the reference locally.
+The **14,000-update EMA** policy completed 160/160 episodes under the fixed LAFAN1 G1 evaluation protocol. Its exported ONNX is included in this repository. The deployment stack uses NVIDIA GEAR-SONIC for standby and joystick locomotion and LoopMimic for motion tracking. The default deployment clip is the full **131.48 s** `dance1_subject2`.
 
-- [安装与快速开始](deploy/README.md)
-- [Sim2Sim · MuJoCo 与遥控器回环复验](deploy/sim2sim/README.md)
-- [Sim2Real · Unitree SDK2、原装遥控器和里程计](deploy/sim2real/README.md)
-- [14,000-update EMA deployment artifact](deploy/shared/models/loopmimic_014000/)
+- [训练、数据准备和复现](training/README.md) · [方法](training/METHOD.md) · [14,000 次更新结果](training/config/result_014000.json)
+- [部署安装](deploy/README.md) · [Sim2Sim](deploy/sim2sim/README.md) · [Sim2Real](deploy/sim2real/README.md)
+- [14,000-update EMA ONNX and configuration](deploy/shared/models/loopmimic_014000/)
 
-The Sim2Real input and handoff can be exercised using CRC-valid Unitree gamepad packets in MuJoCo. Hardware deployment requires a live pelvis odometry source on the target G1 and hardware commissioning. See the Sim2Real guide for the state contract.
+The Sim2Real controller's gamepad and handoff path has been exercised in MuJoCo with CRC-valid Unitree packets. See the hardware guide for the pelvis odometry requirements.

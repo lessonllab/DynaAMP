@@ -1,0 +1,12 @@
+.venv/
+data/
+runs/
+logs/
+wandb/
+__pycache__/
+.pytest_cache/
+*.pt
+*.npz
+*.csv
+*.mp4
+*.onnx
