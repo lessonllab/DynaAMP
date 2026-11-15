@@ -1,4 +1,4 @@
-# Sim2Sim · SONIC 与 LoopMimic
+# Sim2Sim · SONIC 与 DynaAMP
 
 完成 [公共安装](../README.md#安装) 后，从仓库根目录运行。
 
@@ -17,7 +17,7 @@ bash deploy/sim2sim/sonic.sh --gamepad-demo --output /tmp/loopmimic-gamepad
 
 第一个命令复验键盘模式的完整舞蹈、待机、走跑和停车。第二个命令把原装遥控器格式的按键、摇杆和 CRC 有效的状态包经回环 DDS 送给真机入口。它按 **Start → F1 → A** 触发舞蹈，检查完整参考播放，之后推摇杆走路、按 **B** 停车并按 **Select** 退出。
 
-仿真采用 500 Hz MuJoCo，LoopMimic 和 SONIC 原生跟踪器均按 50 Hz 更新。仿真全过程使用同一个 G1 29 自由度的物理状态。输出目录含 `results.json`、`trace.npz` 和 SONIC 日志。回环手柄复验增加 `loopmimic.log`。可通过 `--dance` 传入其他 50 Hz 且具备相同 29 个关节的 NPZ。
+仿真采用 500 Hz MuJoCo，DynaAMP 和 SONIC 原生跟踪器均按 50 Hz 更新。仿真全过程使用同一个 G1 29 自由度的物理状态。输出目录含 `results.json`、`trace.npz` 和 SONIC 日志。回环手柄复验增加 `loopmimic.log`。可通过 `--dance` 传入其他 50 Hz 且具备相同 29 个关节的 NPZ。
 
 [完整舞蹈的回环验证结果](validation_014000.json)
 

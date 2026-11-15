@@ -1,0 +1,15 @@
+{
+  "project": "DynaAMP",
+  "title": "DynaAMP: Learning Humanoid Control through Differentiable Dynamics and Adversarial Motion Priors",
+  "command_methods": {
+    "no_feedback": "DynaAMP",
+    "loopmimic": "DynaAMP + Feedback",
+    "ppo": "AMP+PPO"
+  },
+  "historical_tracking_methods": {
+    "v2": "DynaAMP + Feedback",
+    "v1": "DynaAMP + Feedback (v1)",
+    "v2_no_gain": "DynaAMP + Feedback (no gain calibration)"
+  },
+  "compatibility": "Internal method IDs, training services, frozen snapshots, raw evaluation data, model files and checkpoint paths retain their original names. The released 14000-update policy is the feedback variant."
+}

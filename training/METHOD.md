@@ -1,4 +1,6 @@
-# LoopMimic v2 方法
+# DynaAMP + Feedback 方法
+
+此处复现历史反馈版本（原 LoopMimic v2）；14,000 次更新的部署模型不代表关闭反馈组的结果。
 
 正式实验从随机初始化开始。第 14,000 次策略更新的 EMA 权重对应部署模型。[训练和复现说明](README.md)
 
@@ -8,10 +10,10 @@
 - **EMA 与困难片段。** 借鉴 [BlinkMimic-plus 的 train.py](https://github.com/rascal-yang/BlinkMimic-plus/blob/main/src/blinkmimic/train.py) 的 EMA 与失败前重置思路。EMA 系数 0.995，只用于确定性评估；训练始终用 live actor。归一化统计直接复制。恢复 SuperMimic 的 return sampler，加入 20% 失败前 3 秒的采样分布，限制在同一 clip 内，并保留均匀探索。
 - **真实终止转移。** 参考 [JonnyDing 的 supermimic 分支](https://github.com/JonnyDing/supermimic_AMP/tree/supermimic) 的终止前状态捕获与有效前缀训练：在 reward 计算时保存自动 reset 之前的真实 next state。世界模型仍预测 7 次转移，评分包含倒下那一步，mask 掉 reset 之后的片段。判别器也可以看到真实失败转移。
 - **Grounded AMP。** 在现有 Body195 上增加 root 高度和投影重力 4 维，得到 199D / 相邻对 398D。Body195 本身对整体刚体变换不敏感，这个扩展使判别器可感知高度、倾斜。真实状态、专家和模型预测共用一套编码；不加入参考帧或任务误差。D 隐藏层仍是 1024/512/256。
-- **配对动作改善校准。** 延伸 LoopMimic 原有的 AMP 补采闭环：同一物理快照下执行原动作序列与 AMP 调整后的动作序列，固定 D，对齐“模型预计的风格变化”与“真实物理中的风格变化”。原来只有状态监督与优先回放；现在这对真实干预直接监督世界模型的动作响应。
+- **配对动作改善校准。** 延伸早期 DynaAMP + Feedback 的 AMP 补采闭环：同一物理快照下执行原动作序列与 AMP 调整后的动作序列，固定 D，对齐“模型预计的风格变化”与“真实物理中的风格变化”。原来只有状态监督与优先回放；现在这对真实干预直接监督世界模型的动作响应。
 - **共用补采数据。** 补采真实窗口同时进入 WM 数据、25% 的 BPTT 初始状态以及 25% 的 D 负样本。优先级逐渐回落，减少旧判别器产生的历史优先级长期主导训练。
 
-JonnyDing 的实际 `supermimic` 分支已经含 WM、AMP 和解析 BPTT，LoopMimic v2 在此类可微路径上加入配对真实干预校准与数据闭环。
+JonnyDing 的实际 `supermimic` 分支已经含 WM、AMP 和解析 BPTT，DynaAMP + Feedback 在此类可微路径上加入配对真实干预校准与数据闭环。
 
 ## 更新规则
 

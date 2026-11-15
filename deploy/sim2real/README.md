@@ -1,6 +1,6 @@
 # Sim2Real · Unitree G1 29 自由度
 
-SONIC 原生 C++ 程序是身体电机命令的唯一发布者。站立、走跑和停车沿用 SONIC。遥控器 A 在 Planner Idle 时请求播放 LoopMimic 的完整舞蹈。部署包含 29 路身体关节，关闭 Dex3。
+SONIC 原生 C++ 程序是身体电机命令的唯一发布者。站立、走跑和停车沿用 SONIC。遥控器 A 在 Planner Idle 时请求播放 DynaAMP 的完整舞蹈。部署包含 29 路身体关节，关闭 Dex3。
 
 此入口已在 MuJoCo 回环上测试。实物 G1 厂固件是否在低层控制期间持续发布可用里程计，以及真机的落地跟踪与舞后交接，需要在目标 G1 上验证。
 

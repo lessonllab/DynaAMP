@@ -1,4 +1,6 @@
-# LoopMimic v2 训练
+# DynaAMP + Feedback 训练
+
+此处复现历史反馈版本（原 LoopMimic v2）；14,000 次更新的部署模型不代表关闭反馈组的结果。
 
 本目录包含生成部署版 14,000 次更新 EMA 策略的训练源码。算法基于 HybridRobotics SuperMimic，保留 32 步 BPTT，并加入可微 AMP、从同一物理状态采集的配对动作干预，以及用真实干预校准世界模型的风格改善预测。详细计算见 [方法说明](METHOD.md)。
 
@@ -7,8 +9,8 @@
 在仓库根目录运行。训练需要 Linux、带 CUDA 的 NVIDIA GPU、C++ 编译器、Git 和 [uv](https://docs.astral.sh/uv/)。`setup.sh` 固定 MjLab Research 提交并用锁文件安装 Python 3.13 训练环境。实测使用 RTX 5080 16 GB、PyTorch 2.15.0、MuJoCo 与 MuJoCo Warp 3.16.0、Warp 1.19.0。训练与部署使用各自的环境。
 
 ```bash
-git clone https://github.com/lessonllab/loopmimic.git
-cd loopmimic
+git clone https://github.com/lessonllab/DynaAMP.git
+cd DynaAMP
 bash training/setup.sh
 uv run --project training --locked python training/prepare_data.py
 ```
@@ -75,4 +77,4 @@ bash deploy/sim2sim/sonic.sh --dance-demo --bundle training/runs/ema_014000 \
 
 - [HybridRobotics SuperMimic](https://github.com/HybridRobotics/supermimic/tree/abc124c1bd5976341034668af3d12c087f2f1f55)，Copyright 2026 The SuperMimic Authors，Apache-2.0。
 - [HybridRobotics MjLab Research](https://github.com/HybridRobotics/mjlab_research/tree/dd51a9fcc98791a2f0b018b3c7f71a3eefd5ecdd)，Apache-2.0。
-- `src/supermimic/vendor/` 保留 AMP_mjlab 和 supermimic_AMP 实验比较代码的来源、版权和许可证。运行 LoopMimic 使用自身的可微 AMP 与配对干预实现。
+- `src/supermimic/vendor/` 保留 AMP_mjlab 和 supermimic_AMP 实验比较代码的来源、版权和许可证。运行 DynaAMP + Feedback 使用自身的可微 AMP 与配对干预实现。

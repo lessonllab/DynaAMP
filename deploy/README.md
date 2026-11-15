@@ -1,6 +1,8 @@
-# LoopMimic G1 部署
+# DynaAMP G1 部署
 
-面向 Unitree G1 29 自由度。NVIDIA SONIC 负责站立待机、遥控走跑和停车，LoopMimic 负责舞蹈。默认动作是 LAFAN1 的完整 `dance1_subject2`，共 **6,574 帧、131.48 秒**。起舞前另有 **1.2 秒**的姿态过渡。
+当前随仓库提供的 14,000 次更新 ONNX 属于 **DynaAMP + Feedback**（原 LoopMimic v2）；模型文件与目录保留原名。
+
+面向 Unitree G1 29 自由度。NVIDIA SONIC 负责站立待机、遥控走跑和停车，DynaAMP 负责舞蹈。默认动作是 LAFAN1 的完整 `dance1_subject2`，共 **6,574 帧、131.48 秒**。起舞前另有 **1.2 秒**的姿态过渡。
 
 - [Sim2Sim](sim2sim/README.md) · MuJoCo、键盘控制和遥控器 DDS 回环复验
 - [Sim2Real](sim2real/README.md) · Unitree 原装遥控器、SDK2 和真机骨盆状态输入
@@ -40,4 +42,4 @@ bash deploy/sim2sim/sonic.sh --gamepad-demo --output /tmp/loopmimic-gamepad
 
 ## 来源
 
-LoopMimic 推理权重来自 LAFAN1 G1 训练的第 14,000 次策略更新，导出 EMA actor 和训练归一化。克隆后可以直接加载 ONNX，无需训练环境或训练 checkpoint。参考轨迹从原数据源下载，只在本地转换。[LAFAN1](https://github.com/ubisoft/ubisoft-laforge-animation-dataset) · [Unitree G1 重定向数据](https://huggingface.co/datasets/lvhaidong/LAFAN1_Retargeting_Dataset) · [SONIC 源码](https://github.com/NVlabs/GR00T-WholeBodyControl/tree/1e1ec4f5f27e6c3e03048f693bd7c60cce04afda) · [SONIC 发布权重](https://huggingface.co/nvidia/GEAR-SONIC/tree/6733128a3d8a523b1418b06bca3cdf61c8b0987f)
+DynaAMP 推理权重来自 LAFAN1 G1 训练的第 14,000 次策略更新，导出 EMA actor 和训练归一化。克隆后可以直接加载 ONNX，无需训练环境或训练 checkpoint。参考轨迹从原数据源下载，只在本地转换。[LAFAN1](https://github.com/ubisoft/ubisoft-laforge-animation-dataset) · [Unitree G1 重定向数据](https://huggingface.co/datasets/lvhaidong/LAFAN1_Retargeting_Dataset) · [SONIC 源码](https://github.com/NVlabs/GR00T-WholeBodyControl/tree/1e1ec4f5f27e6c3e03048f693bd7c60cce04afda) · [SONIC 发布权重](https://huggingface.co/nvidia/GEAR-SONIC/tree/6733128a3d8a523b1418b06bca3cdf61c8b0987f)
